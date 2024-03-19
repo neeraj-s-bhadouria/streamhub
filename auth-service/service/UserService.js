@@ -24,18 +24,18 @@ export const registerUser = async (data) => {
 
 // performing all the validations related to registration of the user
 export const registerValidations = async (data) => {
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const { errors, isValid } = await validateRegisterInput(data);
   if (!isValid) {
     return errors;
   }
   const isAlreadyExist = await User.findOne({
-    $or: [{ email: req.body.email }, { username: req.body.username }],
+    $or: [{ email: data.email }, { username: data.username }],
   });
   if (isAlreadyExist) {
-    if (isAlreadyExist.email === req.body.email) {
+    if (isAlreadyExist.email === data.email) {
       errors.email = "Email already exists";
     }
-    if (isAlreadyExist.username === req.body.username) {
+    if (isAlreadyExist.username === data.username) {
       errors.username = "Username already taken";
     }
   }
