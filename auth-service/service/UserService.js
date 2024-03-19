@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import User from "../model/User.js";
 import { validateRegisterInput } from "../validation/register.js";
-import { isEmpty } from "validator";
+import { isEmpty } from "../validation/is-empty.js";
 dotenv.config();
 
 export const registerUser = async (data) => {
